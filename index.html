@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diwaxan Ultimate Quiz - 100 Questions</title>
+    <title>Diwaxany Neno Quiz 100</title>
     <style>
-        /* هەمان ستایلە شیکەکەی خۆت بێ گۆڕانکاری */
         :root {
-            --primary: #00d4ff;
-            --correct: #2ecc71;
-            --wrong: #e74c3c;
-            --bg: #05070a;
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --correct: #00ff88;
+            --wrong: #ff3838;
+            --bg: #030508;
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         body {
             background-color: var(--bg);
-            background-image: radial-gradient(circle at center, #1a1a2e 0%, #05070a 100%);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.1) 0%, transparent 40%);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
@@ -28,108 +30,61 @@
         }
 
         .container {
-            width: 90%;
-            max-width: 500px;
+            width: 92%;
+            max-width: 480px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 25px;
-            border-radius: 30px;
-            backdrop-filter: blur(15px);
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 35px;
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
         }
 
-        .jump-to {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
+        .app-brand { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .brand-text { font-size: 24px; font-weight: 900; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .crown { font-size: 35px; filter: drop-shadow(0 0 8px gold); }
 
-        .jump-to input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--primary);
-            color: white;
-            padding: 8px;
-            border-radius: 10px;
-            width: 70px;
-            text-align: center;
-            outline: none;
-        }
+        .jump-to { margin-bottom: 20px; display: flex; gap: 10px; justify-content: center; }
+        .jump-to input { background: rgba(255,255,255,0.07); border: 1px solid var(--primary); color: white; padding: 10px; border-radius: 15px; width: 80px; text-align: center; outline: none; }
+        .jump-btn { background: var(--secondary); border: none; color: white; padding: 10px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; }
 
-        .header-info {
-            font-size: 16px;
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .question-box {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
+        .header-info { font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 700; }
+        .question-box { font-size: 22px; font-weight: 700; margin-bottom: 30px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        
         .option {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             color: white;
             padding: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
+            transition: 0.3s;
         }
 
-        .correct { 
-            background-color: var(--correct) !important; 
-            box-shadow: 0 0 25px rgba(46, 204, 113, 0.4);
-        }
-
-        .wrong { 
-            background-color: var(--wrong) !important; 
-            box-shadow: 0 0 25px rgba(231, 76, 60, 0.4);
-        }
-
+        .correct { background: linear-gradient(45deg, #00b060, #00ff88) !important; color: #000 !important; font-weight: 800; }
+        .wrong { background: linear-gradient(45deg, #d63031, #ff3838) !important; font-weight: 800; }
+        
         .next-btn { 
-            margin-top: 30px;
-            padding: 15px 40px;
-            border-radius: 50px;
-            background: var(--primary);
-            color: #000;
-            display: none;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
-
-        .jump-btn { 
-            background: transparent; 
-            border: 1px solid var(--primary); 
-            color: var(--primary); 
-            padding: 8px 15px;
-            border-radius: 50px;
-            cursor: pointer;
+            margin-top: 30px; padding: 15px 40px; border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; display: none; font-weight: 800; border: none; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="app-brand">
+            <span class="crown">👑</span>
+            <span class="brand-text">DIWAXANY NENO</span>
+        </div>
+
         <div class="jump-to">
-            <input type="number" id="jumpInput" placeholder="ژمارە">
-            <button class="jump-btn" onclick="jumpToQuestion()">بڕۆ بۆ پرسیار</button>
+            <input type="number" id="jumpInput" placeholder="1-100">
+            <button class="jump-btn" onclick="jumpToQuestion()">بڕۆ</button>
         </div>
 
         <div class="header-info">پرسیاری: <span id="qNum">1</span> / 100</div>
@@ -147,36 +102,36 @@
             masterGain.connect(audioCtx.destination);
 
             if (isCorrect) {
-                masterGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                masterGain.gain.setValueAtTime(0.4, audioCtx.currentTime);
                 [523, 659, 784].forEach((f, i) => {
                     const osc = audioCtx.createOscillator();
                     const g = audioCtx.createGain();
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.08));
-                    g.gain.setValueAtTime(0.5, audioCtx.currentTime + (i * 0.08));
-                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.08) + 0.5);
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.1));
+                    g.gain.setValueAtTime(0.5, audioCtx.currentTime + (i * 0.1));
+                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.1) + 0.4);
                     osc.connect(g); g.connect(masterGain);
-                    osc.start(audioCtx.currentTime + (i * 0.08));
-                    osc.stop(audioCtx.currentTime + (i * 0.08) + 0.5);
+                    osc.start(audioCtx.currentTime + (i * 0.1));
+                    osc.stop(audioCtx.currentTime + (i * 0.1) + 0.4);
                 });
             } else {
-                masterGain.gain.setValueAtTime(1.0, audioCtx.currentTime); 
-                [220, 180].forEach((f, i) => {
+                // دەنگی زۆر بەهێز بۆ وەڵامی هەڵە
+                masterGain.gain.setValueAtTime(1.8, audioCtx.currentTime); 
+                [110, 80].forEach((f, i) => {
                     const osc = audioCtx.createOscillator();
                     const g = audioCtx.createGain();
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.12));
-                    g.gain.setValueAtTime(0.8, audioCtx.currentTime + (i * 0.12));
-                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.12) + 0.3);
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.15));
+                    g.gain.setValueAtTime(1.0, audioCtx.currentTime + (i * 0.15));
+                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.15) + 0.6);
                     osc.connect(g); g.connect(masterGain);
-                    osc.start(audioCtx.currentTime + (i * 0.12));
-                    osc.stop(audioCtx.currentTime + (i * 0.12) + 0.3);
+                    osc.start(audioCtx.currentTime + (i * 0.15));
+                    osc.stop(audioCtx.currentTime + (i * 0.15) + 0.6);
                 });
             }
         }
 
         const myQuestions = [
-            // 60 پرسیارە ڕەسەنەکەی خۆت لێرەدا هەن...
             {q: "قوڵترین زەریا لە جیهاندا کامەیە؟", a: ["ئارام", "ئەتڵەسی", "هیندی", "جەمسەری"], correct: 0},
             {q: "کێ کیشوەری ئەمریکای دۆزییەوە؟", a: ["ماجەلان", "کریستۆفەر کۆڵۆمبس", "واسکۆ دا گاما", "ئامێریگۆ"], correct: 1},
             {q: "پایتەختی وڵاتی فەرەنسا کوێیە؟", a: ["لەندەن", "ڕۆما", "پاریس", "مەدرید"], correct: 2},
@@ -237,8 +192,6 @@
             {q: "چەند ڕەنگ لە پەلکە زێڕینەدا هەیە؟", a: ["٥", "٦", "٧", "٨"], correct: 2},
             {q: "کام گۆڕەپانی یاری تۆپی پێ گەورەترینە لە جیهاندا؟", a: ["کامپ نۆ", "سانتیاگۆ بێرنابیۆ", "ڕونگرادۆ", "وێمبڵی"], correct: 2},
             {q: "جگەر لە کام لای جەستەی مرۆڤدایە؟", a: ["ڕاست", "چەپ", "ناوەڕاست", "خوارەوە"], correct: 0},
-
-            // 40 پرسیاری نوێ لێرە دەست پێ دەکات (تا ببێتە 100)
             {q: "کام وڵات گەورەترین بەرهەمهێنەری قاوەیە لە جیهان؟", a: ["ئیتیۆپیا", "ڤێتنام", "بەرازیل", "کۆڵۆمبیا"], correct: 2},
             {q: "چەند پیت لە ئەلفوبێی ئینگلیزیدا هەیە؟", a: ["٢٤", "٢٥", "٢٦", "٢٧"], correct: 2},
             {q: "گەورەترین وڵات لە جیهاندا لە ڕووی ڕووبەرەوە؟", a: ["چین", "ڕووسیا", "کەنەدا", "ئەمریکا"], correct: 1},
@@ -278,7 +231,7 @@
             {q: "کام کانزا لەناو پەنیر و شیردا هەیە بۆ ئێسک؟", a: ["ئاسن", "پۆتاسیۆم", "کالسیۆم", "مەگنیسیۆم"], correct: 2},
             {q: "کورتکراوەی CPU چییە؟", a: ["Central Processing Unit", "Computer Power Unit", "Core Personal Unit", "Control Process User"], correct: 0},
             {q: "پایتەختی وڵاتی ئەڵمانیا؟", a: ["مایونخ", "هامبۆرگ", "بەرلین", "فرانکتفۆرت"], correct: 2},
-            {q: "دوایین پرسیار: ١٠٠ دابەشی ٢ چەند دەکات؟", a: ["١٠", "٢٠", "٥٠", "١٠٠"], correct: 2}
+            {q: "١٠٠ دابەشی ٢ چەند دەکات؟", a: ["١٠", "٢٠", "٥٠", "١٠٠"], correct: 2}
         ];
 
         let currentIdx = 0;
@@ -303,26 +256,23 @@
         function check(element, isCorrect) {
             const allButtons = document.querySelectorAll(".option");
             allButtons.forEach(b => b.onclick = null); 
-
             if (isCorrect) {
                 element.classList.add('correct');
                 playStrongSound(true);
             } else {
                 element.classList.add('wrong');
                 playStrongSound(false); 
-                const correctIdx = myQuestions[currentIdx].correct;
-                allButtons[correctIdx].classList.add('correct');
+                allButtons[myQuestions[currentIdx].correct].classList.add('correct');
             }
             document.getElementById("nextBtn").style.display = "inline-block";
         }
 
         function nextQuestion() {
             currentIdx++;
-            if (currentIdx < myQuestions.length) {
-                loadQuestion();
-            } else {
-                document.getElementById("question").innerText = "پیرۆزە ماردین! هەموو ١٠٠ پرسیارەکەت بە سەرکەوتوویی تەواو کرد.";
-                document.getElementById("options").innerHTML = "👑🏆✨";
+            if (currentIdx < myQuestions.length) loadQuestion();
+            else {
+                document.getElementById("question").innerText = "پیرۆزە! هەموو پرسیارەکان تەواو بوون.";
+                document.getElementById("options").innerHTML = "🏆👑";
                 document.getElementById("nextBtn").style.display = "none";
             }
         }
@@ -332,11 +282,8 @@
             if (val >= 1 && val <= myQuestions.length) {
                 currentIdx = val - 1;
                 loadQuestion();
-            } else {
-                alert("تکایە ژمارەیەک لە نێوان ١ بۆ ١٠٠ بنووسە");
             }
         }
-
         loadQuestion();
     </script>
 </body>
